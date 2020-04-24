@@ -1,25 +1,45 @@
 {{ define "js"}}
 	<script type="text/javascript">
-        var c = document.getElementById("graffitiwall");
-        var ctx = c.getContext("2d");
-        ctx.fillStyle = "#FFFFFF"
+		var c = document.getElementById("graffitiwall");
+		var ctx = c.getContext("2d");
+		ctx.fillStyle = "#FFFFFF"
 
-        ctx.fillRect(0, 0, 999, 1099)
+		ctx.fillRect(0, 0, 999, 1099)
 
-        ctx.fillStyle = "#000000"
-        ctx.font = "15px Arial";
-        ctx.fillText("by beaconcha.in", 875, 1030);
+		ctx.fillStyle = "#000000"
+		ctx.font = "15px Arial";
+		ctx.fillText("by beaconcha.in", 875, 1030);
 
-        ctx.beginPath();
-        ctx.moveTo(0, 1000);
-        ctx.lineTo(999, 1000);
-        ctx.stroke();
+		ctx.beginPath();
+		ctx.moveTo(0, 1000);
+		ctx.lineTo(999, 1000);
+		ctx.stroke();
 
-        var pixels = {{.}}
-            pixels.forEach(function (p) {
-                ctx.fillStyle = "#" + p.color
-                ctx.fillRect(p.x, p.y, 1, 1)
-            })
+		var pixels = {{.}}
+			pixels.forEach(function (p) {
+				ctx.fillStyle = "#" + p.color
+				ctx.fillRect(p.x, p.y, 1, 1)
+			})
+	</script>
+	<script type="text/javascript" src="http://localhost:8001/graffitiwall.js?b"></script>
+	<script type="text/javascript">
+		var graffities = []
+		for (var i=0; i<1000; i++) {
+			graffities.push({
+				x: Math.random()*1000|0,
+				y: Math.random()*1000|0,
+				color: (Math.max(16**5,Math.random()*16**6|0)).toString(16),
+				validator: Math.random()*20000|0,
+			})
+		}
+		graffities.push({x:0,y:0,color:'ff0000',validator:1})
+		graffities.push({x:0,y:999,color:'ff0000',validator:1})
+		graffities.push({x:999,y:0,color:'ff0000',validator:1})
+		graffities.push({x:999,y:999,color:'ff0000',validator:1})
+		var graffitiWall = new GraffitiWall({
+			wrapper: document.getElementById('graffitiwall2'),
+			graffities: graffities,
+		})
 	</script>
 {{end}}
 
@@ -49,6 +69,27 @@
 		</div>
 	</div>
 	<div class="row">
+		<table>
+			<tr><td>slot</td><td>val</td><td>col</td><td>x</td><td>y</td></tr>
+			{{range $i, $e := .}}
+				<tr>
+					<td>{{.Slot}}</td>
+					<td>{{.Validator}}</td>
+					<td>{{.Color}}</td>
+					<td>{{.X}}</td>
+					<td>{{.Y}}</td>
+				</tr>
+			{{end}}
+		</table>
+	</div>
+	<div class="row">
+		<h2>v2</h2>
+		<div class="col-md-12 text-center">
+			<div id="graffitiwall2" style="width:100%;height:500px;position:relative;"></div>
+		</div>
+	</div>
+	<div class="row">
+		<h2>v1</h2>
 		<div class="col-md-12 text-center">
 			<canvas id="graffitiwall" width="1000" height="1050"></canvas>
 		</div>

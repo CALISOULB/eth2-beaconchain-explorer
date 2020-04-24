@@ -16,6 +16,7 @@ var graffitiwallTemplate = template.Must(template.New("vis").ParseFiles("templat
 
 func Graffitiwall(w http.ResponseWriter, r *http.Request) {
 
+	graffitiwallTemplate = template.Must(template.New("vis").ParseFiles("templates/layout.html", "templates/graffitiwall.html"))
 	var err error
 
 	w.Header().Set("Content-Type", "text/html")
