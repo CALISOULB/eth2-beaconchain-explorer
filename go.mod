@@ -5,8 +5,6 @@ go 1.15
 require (
 	cloud.google.com/go/firestore v1.4.0 // indirect
 	firebase.google.com/go v3.13.0+incompatible
-	github.com/PuerkitoBio/goquery v1.6.1
-	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/chromedp/cdproto v0.0.0-20200709115526-d1f6fc58448b
 	github.com/chromedp/chromedp v0.5.3
@@ -16,7 +14,7 @@ require (
 	github.com/ethereum/go-ethereum v1.9.14
 	github.com/evanw/esbuild v0.8.23
 	github.com/go-openapi/spec v0.19.12 // indirect
-	github.com/gogo/protobuf v1.3.1
+	github.com/gogo/protobuf v1.3.2
 	github.com/gorilla/context v1.1.1
 	github.com/gorilla/csrf v1.7.0
 	github.com/gorilla/mux v1.8.0
